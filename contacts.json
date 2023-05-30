@@ -1,14 +1,1 @@
-{
-    "1":{
-        "contacts":[
-            {"name":"emma","age":24},
-            {"name":"bris","age":24}
-        ]
-    },
-    "2":{
-        "contacts":[
-            {"name":"angel","age":24},
-            {"name":"victor","age":24}
-        ]
-    }
-}
+{"1":{"contacts":[{"name":"emma","age":24},{"name":"bris","age":24}]},"2":{"contacts":[{"name":"angel","age":24},{"name":"victor","age":24},{"name":"emma","age":"24"},{"name":"pedro","age":"23"}]}}

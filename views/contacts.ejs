@@ -5,14 +5,98 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacts</title>
+    <style>
+        .container-form{
+            display: flex;
+            flex-direction: column;
+            max-width: 250px;
+            row-gap: 5px;
+        }
+
+        .container{
+            padding: 10px;
+        }
+
+
+        ul{
+            padding: 0px;
+            list-style: none;
+        }
+
+        ul li{
+            margin:0px;
+            font-size: 20px;
+        }
+
+
+        input[placeholder='name']{
+            padding: 5px;
+        }
+        
+        input[placeholder='age']{
+            padding: 5px;
+        }
+
+        button{
+            padding:10px;
+            cursor: pointer;
+        }
+
+    </style>
 </head>
 <body>
 
-     <ul>
-        <% contacts.forEach(function(contact){ %>
-            <li><%= contact.name %></li> 
-        <% }); %>
-     </ul>
+    <div class="container">
+        <h1>Contacts</h1>
+        <ul>
+            <% contacts.forEach(function(contact){ %>
+                <li><%= contact.name %> <%= contact.age %></li> 
+            <% }); %>
+        </ul>
+
+        <div class="container-form">
+            <input placeholder="name">
+            <input type="number" placeholder="age">
+            <button id="btn-create-contact">Create Contact</button>
+        </div>
+    </div>
+
+     <script>
+
+        document.addEventListener("DOMContentLoaded",()=>{
+
+            const btnContact = document.querySelector("#btn-create-contact");
+            const nameElement = document.querySelector("input[placeholder='name']");
+            const ageElement = document.querySelector("input[placeholder='age']");
+
+            btnContact.addEventListener("click", async ()=>{
+
+                const name = nameElement.value;
+                const age  = ageElement.value;
+
+                const response = await fetch("http://localhost:3000/contacts",{
+                     method:"POST",
+                     headers:{
+                        "Content-Type":"application/json",
+                        "Accept":"application/json",
+                        "credentials":"include"
+                     },
+                     body: JSON.stringify({name,age})
+                })
+
+
+                const data = await response.json();
+                console.log(data);
+
+
+                window.location.reload();
+
+
+            })
+
+        });
+
+     </script>
 
 </body>
 </html>
